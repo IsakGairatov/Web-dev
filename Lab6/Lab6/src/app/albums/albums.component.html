@@ -1,1 +1,13 @@
-<p>albums works!</p>
+<h1>Album List:</h1>
+
+<ul>
+  <li *ngFor="let album of albums">
+      <p>User: {{album.userId}}</p>
+      id: {{album.id}} <br>
+    <a routerLink="/Albums/{{album.id}}">
+      title: {{album.title}} </a> <br><br>
+
+    <button>delete</button>
+  </li>
+
+</ul>

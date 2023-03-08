@@ -9,6 +9,17 @@ import { AlbumsComponent } from './albums/albums.component';
 import { AlbumDetailComponent } from './album-detail/album-detail.component';
 import { AlbumPhotosComponent } from './album-photos/album-photos.component';
 
+import {Routes, RouterModule, ActivatedRoute, ParamMap} from "@angular/router";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+
+const routes: Routes = [
+  {path: 'home', component: HomeComponent},
+  {path: 'about', component: AboutComponent},
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'Albums', component: AlbumsComponent},
+  {path: 'Albums/:id', component: AlbumDetailComponent},
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,8 +31,11 @@ import { AlbumPhotosComponent } from './album-photos/album-photos.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot(routes),
+    HttpClientModule,
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })
