@@ -20,4 +20,10 @@ export class AlbumsComponent {
       this.albums = albums;
     })
   }
+
+  deleteIt(alb: Album) {
+    this.albumService.deleteAlbum(alb.id).subscribe(response => {
+      this.albums = this.albums.filter(album => album.id !== alb.id);
+    });
+  }
 }
