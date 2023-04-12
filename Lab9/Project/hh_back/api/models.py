@@ -10,6 +10,8 @@ class Company(models.Model):
         verbose_name = 'Company'
         verbose_name_plural = 'Companies'
 
+    def get_id(self):
+        return self.id
 
     def to_Json(self):
         return {
@@ -17,11 +19,12 @@ class Company(models.Model):
             'name': self.name,
             'desc': self.description,
             'city': self.city,
-            'address': self.address
+            'address': self.address,
             }
 
     def __str__(self):
         return self.name
+
 
 class Vacancy(models.Model):
     name = models.CharField(max_length=200)
@@ -39,7 +42,7 @@ class Vacancy(models.Model):
             'name': self.name,
             'desc': self.description,
             'salary': self.salary,
-            'company_id': self.company
+            'company': self.company_id,
             }
 
     def __str__(self):
