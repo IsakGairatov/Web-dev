@@ -10,6 +10,16 @@ class Company(models.Model):
         verbose_name = 'Company'
         verbose_name_plural = 'Companies'
 
+
+    def to_Json(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'desc': self.description,
+            'city': self.city,
+            'address': self.address
+            }
+
     def __str__(self):
         return self.name
 
@@ -22,6 +32,15 @@ class Vacancy(models.Model):
     class Meta:
         verbose_name = 'Vacancy'
         verbose_name_plural = 'Vacancies'
+
+    def to_Json(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'desc': self.description,
+            'salary': self.salary,
+            'company_id': self.company
+            }
 
     def __str__(self):
         return self.name
