@@ -9,8 +9,9 @@ c_json = [c.to_Json() for c in companies]
 c_ids = [c.get_id() for c in companies]
 
 vacans = Vacancy.objects.all()
+v10 = Vacancy.objects.all().order_by('-salary')[:10]
 v_json = [v.to_Json() for v in vacans]
-
+v10_json = [v.to_Json() for v in v10]
 
 error = '''<!DOCTYPE html>
 <html lang="en">
@@ -49,6 +50,10 @@ def comp_vacs(request, c_id):
         output = [i for i in v_json if i['company'] == c_id]
         return JsonResponse(output, safe=False)
     else: return HttpResponse(error)
+
+
+def top10(request):
+    return JsonResponse(v10_json, safe=False)
 
 
 
