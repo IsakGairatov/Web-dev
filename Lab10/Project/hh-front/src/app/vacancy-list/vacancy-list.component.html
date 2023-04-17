@@ -1,5 +1,8 @@
 <h1>All vacancies</h1>
 
 <div *ngFor="let v of vacns">
-  <p>{{v.id}} - {{v.name}}</p>
+  <a [routerLink]="['/vacancies', v.id]">
+    <p>{{v.id}} - {{v.name}}</p>
+  </a>
+
 </div>

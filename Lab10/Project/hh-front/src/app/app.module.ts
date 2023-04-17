@@ -9,6 +9,7 @@ import {RouterModule} from "@angular/router";
 import { VacancyListComponent } from './vacancy-list/vacancy-list.component';
 import { CompaniesDetailComponent } from './companies-detail/companies-detail.component';
 import { VacanciesDeatailComponent } from './vacancies-deatail/vacancies-deatail.component';
+import { CompaniesVacanciesComponent } from './companies-vacancies/companies-vacancies.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { VacanciesDeatailComponent } from './vacancies-deatail/vacancies-deatail
     StartingPageComponent,
     VacancyListComponent,
     CompaniesDetailComponent,
-    VacanciesDeatailComponent
+    VacanciesDeatailComponent,
+    CompaniesVacanciesComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +30,7 @@ import { VacanciesDeatailComponent } from './vacancies-deatail/vacancies-deatail
       {path: 'vacancies', component: VacancyListComponent},
       {path: 'companies/:cId', component: CompaniesDetailComponent},
       {path: 'vacancies/:vId', component: VacanciesDeatailComponent},
+      {path: 'companies/:cId/vacancies', component: CompaniesVacanciesComponent}
     ])
   ],
   providers: [],
