@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {COMPANY, Company} from "../Models/Company";
 import {ActivatedRoute} from "@angular/router";
 import {Vacancy, Vacs} from "../Models/Vacancy";
+import {VacanciesService} from "../vacancies.service";
 
 @Component({
   selector: 'app-vacancies-deatail',
@@ -10,12 +11,13 @@ import {Vacancy, Vacs} from "../Models/Vacancy";
 })
 export class VacanciesDeatailComponent {
   vac: Vacancy | undefined;
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private vacancyService: VacanciesService) { }
 
   ngOnInit() {
     const routeParams = this.route.snapshot.paramMap;
     const VacIdfromRout = Number(routeParams.get('vId'));
 
-    this.vac = Vacs.find(vac => vac.id === VacIdfromRout)
+    this.vacancyService.getVac(VacIdfromRout).subscribe((data) =>
+    this.vac = data)
   }
 }

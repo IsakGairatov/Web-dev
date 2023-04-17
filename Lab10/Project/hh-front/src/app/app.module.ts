@@ -10,6 +10,7 @@ import { VacancyListComponent } from './vacancy-list/vacancy-list.component';
 import { CompaniesDetailComponent } from './companies-detail/companies-detail.component';
 import { VacanciesDeatailComponent } from './vacancies-deatail/vacancies-deatail.component';
 import { CompaniesVacanciesComponent } from './companies-vacancies/companies-vacancies.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CompaniesVacanciesComponent } from './companies-vacancies/companies-vac
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     RouterModule.forRoot([
       {path: '', component: StartingPageComponent},
@@ -30,7 +32,7 @@ import { CompaniesVacanciesComponent } from './companies-vacancies/companies-vac
       {path: 'vacancies', component: VacancyListComponent},
       {path: 'companies/:cId', component: CompaniesDetailComponent},
       {path: 'vacancies/:vId', component: VacanciesDeatailComponent},
-      {path: 'companies/:cId/vacancies', component: CompaniesVacanciesComponent}
+      {path: 'companies/vacancies/:cId', component: CompaniesVacanciesComponent},
     ])
   ],
   providers: [],

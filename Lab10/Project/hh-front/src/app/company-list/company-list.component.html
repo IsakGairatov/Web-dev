@@ -1,7 +1,7 @@
 <h1>All companies</h1>
 
 <div *ngFor="let comp of comps">
-  <a [routerLink]="['/companies', comp.id]">
+  <a [routerLink]="['/companies/vacancies', comp.id]">
     <p>{{comp.id}} - {{comp.name}}</p>
   </a>
 

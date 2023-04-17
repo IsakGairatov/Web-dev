@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import {Vacs} from "../Models/Vacancy";
+import {Vacancy, Vacs} from "../Models/Vacancy";
+import {VacanciesService} from "../vacancies.service";
 
 @Component({
   selector: 'app-vacancy-list',
@@ -7,6 +8,13 @@ import {Vacs} from "../Models/Vacancy";
   styleUrls: ['./vacancy-list.component.css']
 })
 export class VacancyListComponent {
-    vacns = Vacs
+    vacns: Vacancy[] | undefined
+
+  constructor(private vacancyService: VacanciesService) {
+  }
+  ngOnInit() {
+      this.vacancyService.getVansList().subscribe((data) =>
+      this.vacns = data)
+  }
 
 }
