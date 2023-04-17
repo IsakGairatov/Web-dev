@@ -1,7 +1,14 @@
+import json
+from rest_framework.decorators import api_view
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from .models import Vacancy, Company
 from django.http.response import JsonResponse, HttpResponse
 from django.shortcuts import render
 from .Serializer import CompanySerializer, VacancySerializer
+from rest_framework import mixins
+from rest_framework import generics
 
 
 
@@ -14,34 +21,77 @@ error = '''<!DOCTYPE html>
 </html>'''
 
 
+@api_view(['GET', 'POST'])
 def comp(request):
-    companies = Company.objects.all()
-    serializer = CompanySerializer(companies, many=True)
-    return JsonResponse(serializer.data, safe=False)
+    if request.method == 'GET':
+        companies = Company.objects.all()
+        serializer = CompanySerializer(companies, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        ser = CompanySerializer(data=data)
+        if ser.is_valid():
+            ser.save()
+            return JsonResponse(ser.data)
+        else:
+            return HttpResponse(error)
 
 
-def vac(request):
-    vacancies = Vacancy.objects.all()
-    serializer = VacancySerializer(vacancies, many=True)
-    return JsonResponse(serializer.data, safe=False)
+class vac(mixins.ListModelMixin,
+          mixins.CreateModelMixin,
+          generics.GenericAPIView):
+    queryset = Vacancy.objects.all()
+    serializer_class = VacancySerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 
+@api_view(['GET', 'PUT', 'DELETE'])
 def comp_details(request, c_id):
     try:
         comp = Company.objects.get(id=c_id)
-        serializer = CompanySerializer(comp)
-        return JsonResponse(serializer.data)
     except:
         return HttpResponse(error)
 
-
-def vac_details(request, v_id):
-    try:
-        vacans = Vacancy.objects.get(id=v_id)
-        serializer = VacancySerializer(vacans)
-        return JsonResponse(serializer.data)
-    except:
+    if request.method == 'GET':
+        try:
+            serializer = CompanySerializer(comp)
+            return JsonResponse(serializer.data)
+        except:
+            return HttpResponse(error)
+    elif request.method == 'PUT':
+        ser = CompanySerializer(instance=comp, data=request.data)
+        if ser.is_valid():
+            ser.save()
+            return JsonResponse(ser.data)
         return HttpResponse(error)
+    elif request.method == 'DELETE':
+        comp.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+class vac_details(mixins.RetrieveModelMixin,
+                    mixins.UpdateModelMixin,
+                    mixins.DestroyModelMixin,
+                    generics.GenericAPIView):
+
+    queryset = Vacancy.objects.all()
+    serializer_class = VacancySerializer
+    lookup_url_kwarg = 'v_id'
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
 
 
 def comp_vacs(request, c_id):
