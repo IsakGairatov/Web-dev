@@ -109,6 +109,10 @@ def top10(request):
     return JsonResponse(ser.data, safe=False)
 
 
+def Fly():
+    pass
+
+
 
 
 
