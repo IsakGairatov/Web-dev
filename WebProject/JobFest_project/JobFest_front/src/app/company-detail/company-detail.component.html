@@ -1,0 +1,26 @@
+<div id="C_details">
+
+  <div id="C_details_text">
+    <h1>{{comp?.name}}</h1>
+    <p>Область: {{field?.name}}</p>
+    <p>Расположение: г.{{comp?.city}} {{comp?.address}}</p>
+    <h4>Контакты для связи: </h4>
+    <p> Номер: {{comp?.phoneNumber}} <br>
+      Эл. Почта: {{comp?.email}}
+    </p>
+
+    <div id="C_details_text_desc">
+      <h3>Описание:</h3>
+      <p>{{comp?.CompanyDesc}}</p>
+    </div>
+  </div>
+
+
+</div>
+<div id="C_vacs">
+  <div id="C_vacancies" *ngFor="let v of vacans">
+    <h2>{{v.name}}</h2>
+    <p>Зарплата: {{v.salaryStart}} - {{v.salaryEnd}} $</p>
+  </div>
+</div>
+

@@ -1,1 +1,31 @@
-<p>main-page works!</p>
+<div>
+  <div id="Search">
+    <input type="text" style="width: 600px; height: 30px">
+    <button type="button" style="height: 30px; width: 100px; position: relative; left: 620px; bottom: 33px">Поиск</button>
+  </div>
+
+
+  <div id="VacanciesList">
+    <div *ngFor="let vac of listOfVacancies" id="V_ListElement">
+
+      <div id="VacancyListInfo">
+        <h2>{{vac.name}}</h2>
+        <p *ngIf="CompName(vac.company)"> Компания: {{CompName(vac.company)?.name}}</p>
+        <p>Зарплата: {{vac.salaryStart}} - {{vac.salaryEnd}} $</p>
+        <p>Опыт: {{vac.exp}}</p>
+      </div>
+
+      <div>
+        <button type="button" id="More_btn">Подробности</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="Fields">
+      <div *ngFor="let fd of listOfFields">
+        <p>{{fd.name}}</p>
+      </div>
+  </div>
+
+</div>

@@ -1,0 +1,24 @@
+<div *ngIf="vac" id="V_details">
+
+  <div id="V_details_text">
+    <h1>{{vac.name}}</h1>
+    <p>Опыт работы: {{vac.exp}} </p>
+    <p>Область: {{VacField(vac.vacancyField)?.name}} </p>
+    <p>Компания: {{VacComp(vac.company)?.name}} </p>
+    <p>Зарплата: {{vac.salaryStart}} - {{vac.salaryEnd}} $</p>
+    <br>
+
+    <div id="V_details_text_desc">
+      <h3>Описание:</h3>
+      <p>{{vac.description}}</p>
+    </div>
+
+    <button type="button" style="margin-top:30px; width: 100px; height: 30px">Откликнуться</button>
+
+  </div>
+
+
+
+
+
+</div>

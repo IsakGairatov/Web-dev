@@ -1,0 +1,28 @@
+#C_vacs {
+  display: flex;
+  flex-direction: row;
+}
+
+#C_vacancies {
+  margin: 20px;
+  padding: 20px;
+  overflow: hidden;
+  background-color: #6DDCBD;
+}
+
+#C_details {
+  width: 900px;
+  margin-left: 20%;
+  margin-top: 3%;
+  background-color: #6DDCBD;
+}
+
+#C_details_text {
+  margin: 20px;
+  padding: 10px;
+}
+
+#C_details_text_desc {
+  background-color: aquamarine;
+  padding: 0.5px 20px 20px;
+}
